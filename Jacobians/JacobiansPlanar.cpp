@@ -71,6 +71,7 @@ namespace gazebo
       const math::Vector3 ORIGIN1(0.0, 0.0, 0.0);  // origin of frame 1
       const math::Vector3 ORIGIN2(0.0, 0.0, 0.0);  // origin of frame 2
       const math::Vector3 ORIGIN3(0.0, 0.0, 0.0);  // origin of frame 3 
+      const math::Vector3 JointAxis(0.0, 0.0, 1.0); // All joints have axis in the vertical or z direction
       const unsigned X = 0, Y = 1, THETA = 2, J1 = 0, J2 = 1, J3 = 2;
 
       // temporary values
@@ -82,17 +83,17 @@ namespace gazebo
       math::Pose _0P0x, _0xP1, _1P1x, _1xP2, _2P2x, _2xP3; 
 
       // TODO: compute the first transform: frame 0' to 0
-
+	  _0P0x.rot.SetFromAxis(0,0,1,theta1);
       // TODO: compute the second transform: frame 1 to 0' 
-      
+      _0xP1.pos = math::Vector3(2,0,0);      
       // TODO: compute the third transform: frame 1' to 1
-      
+      _1P1x.rot.SetFromAxis(0,0,1,theta2);
       // TODO: compute the fourth transform: frame 2 to 1' 
-
+	  _1xP2.pos = math::Vector3(1.333,0,0);
       // TODO: compute the fifth transform: frame 2' to 2 
-      
+      _2P2x.rot.SetFromAxis(0,0,1,theta3);      
       // TODO: compute the fourth transform: frame 3 to 2' 
-
+	  _2xP3.pos = math::Vector3(0.8712,0,0);
       // convert all poses to transforms
       math::Matrix4 _0T0x = ToMatrix(_0P0x);
       math::Matrix4 _0xT1 = ToMatrix(_0xP1);
@@ -101,23 +102,29 @@ namespace gazebo
       math::Matrix4 _2T2x = ToMatrix(_2P2x);
       math::Matrix4 _2xT3 = ToMatrix(_2xP3);
 
+	  math::Matrix4 _0T1 = _0T0x * _0xT1; // transfrom from frame 1 to 0
+	  math::Matrix4 _1T2 = _1T1x * _1xT2; // transfrom from frame 2 to 1
+	  math::Matrix4 _2T3 = _2T2x * _2xT3; // transfrom from frame 3 to 2	  	  
       // position of the first joint is always (0,0,0)
       math::Vector3 p1(0.0, 0.0, 0.0);
 
       // TODO: compute the position of the second joint
-      math::Vector3 p2 = CHANGEME_VEC3;
+      math::Vector3 p2 = _0T1 * ORIGIN1;
 
       // TODO: compute the position of the third joint
-      math::Vector3 p3 = CHANGEME_VEC3; 
+      math::Vector3 p3 =  _0T1 * _1T2 * ORIGIN2;
 
       // TODO: get the position of the manipulator end point
-      math::Vector3 p = CHANGEME_VEC3;
+      math::Vector3 p = _0T1 * _1T2 * _2T3 * ORIGIN3;
       
       // setup the Jacobian: 3 degrees of freedom x 3 joints
       Ravelin::MatrixNd J(3,3);
-      J(X,J1) = CHANGEME;  J(Y,J1) = CHANGEME;  J(THETA,J1) = CHANGEME;
-      J(X,J2) = CHANGEME;  J(Y,J2) = CHANGEME;  J(THETA,J2) = CHANGEME;
-      J(X,J3) = CHANGEME;  J(Y,J3) = CHANGEME;  J(THETA,J3) = CHANGEME;
+      math::Vector3 Joint1 = Cross(JointAxis,p-p1);
+      math::Vector3 Joint2 = Cross(JointAxis,p-p2);
+      math::Vector3 Joint2 = Cross(JointAxis,p-p2);            
+      J(X,J1) = Joint1(0);  J(Y,J1) = Joint1(1);  J(THETA,J1) = JointAxis(2);
+      J(X,J2) = Joint2(0);  J(Y,J2) = Joint2(1);  J(THETA,J2) = JointAxis(2);
+      J(X,J3) = Joint3(0);  J(Y,J3) = Joint3(1);  J(THETA,J3) = JointAxis(2);
 
       return J;
     }
