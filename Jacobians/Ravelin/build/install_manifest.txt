@@ -1,0 +1,198 @@
+/usr/local/lib/libRavelin.so
+/usr/local/include/Ravelin/SharedResizable
+/usr/local/include/Ravelin/Pose3.h
+/usr/local/include/Ravelin/cblas (1).h
+/usr/local/include/Ravelin/RowIterator.h
+/usr/local/include/Ravelin/Transform3.h
+/usr/local/include/Ravelin/Quat (1).h
+/usr/local/include/Ravelin/PrismaticJointf.h
+/usr/local/include/Ravelin/SVelocityf.h
+/usr/local/include/Ravelin/Pose3f (1).h
+/usr/local/include/Ravelin/Origin3f.h
+/usr/local/include/Ravelin/VectorN.h
+/usr/local/include/Ravelin/SharedMatrixNd.h
+/usr/local/include/Ravelin/fdefs.h
+/usr/local/include/Ravelin/SVelocity.h
+/usr/local/include/Ravelin/SparseVectorNf.h
+/usr/local/include/Ravelin/LinAlgf.h
+/usr/local/include/Ravelin/ConstSharedMatrixN (1).inl
+/usr/local/include/Ravelin/InvalidIndexException.h
+/usr/local/include/Ravelin/NullPointerException.h
+/usr/local/include/Ravelin/FixedJoint.h
+/usr/local/include/Ravelin/Origin3.h
+/usr/local/include/Ravelin/SpatialABInertiad.h
+/usr/local/include/Ravelin/SMomentumd.h
+/usr/local/include/Ravelin/Transform3d.h
+/usr/local/include/Ravelin/Opsf (1).h
+/usr/local/include/Ravelin/MovingTransform3 (1).h
+/usr/local/include/Ravelin/ColumnIteratord.h
+/usr/local/include/Ravelin/MatrixNf.h
+/usr/local/include/Ravelin/SharedMatrixN.h
+/usr/local/include/Ravelin/SVector6d.h
+/usr/local/include/Ravelin/SAcceld.h
+/usr/local/include/Ravelin/SparseMatrixN.h
+/usr/local/include/Ravelin/MatrixN.h
+/usr/local/include/Ravelin/Jointd.h
+/usr/local/include/Ravelin/XMatrixN.inl
+/usr/local/include/Ravelin/Matrix2f.h
+/usr/local/include/Ravelin/UniversalJoint.h
+/usr/local/include/Ravelin/AAngle (1).h
+/usr/local/include/Ravelin/Transform2f.h
+/usr/local/include/Ravelin/Origin2.h
+/usr/local/include/Ravelin/FrameException.h
+/usr/local/include/Ravelin/RowIteratord.h
+/usr/local/include/Ravelin/Pose2d.h
+/usr/local/include/Ravelin/Transform2d.h
+/usr/local/include/Ravelin/Jointf.h
+/usr/local/include/Ravelin/MovingTransform3.h
+/usr/local/include/Ravelin/SparseMatrixNd (1).h
+/usr/local/include/Ravelin/Constants.h
+/usr/local/include/Ravelin/FastThreadable.h
+/usr/local/include/Ravelin/SharedVectorNf.h
+/usr/local/include/Ravelin/NonsquareMatrixException (1).h
+/usr/local/include/Ravelin/SharedMatrixNf.h
+/usr/local/include/Ravelin/SVelocityd.h
+/usr/local/include/Ravelin/SForce (1).h
+/usr/local/include/Ravelin/Pose3f.h
+/usr/local/include/Ravelin/UniversalJoint (1).h
+/usr/local/include/Ravelin/FixedJointd.h
+/usr/local/include/Ravelin/SharedVectorN (1).inl
+/usr/local/include/Ravelin/RevoluteJointd.h
+/usr/local/include/Ravelin/Pose2.h
+/usr/local/include/Ravelin/MovingTransform3d.h
+/usr/local/include/Ravelin/SpatialRBInertiad.h
+/usr/local/include/Ravelin/PrismaticJointf (1).h
+/usr/local/include/Ravelin/Quatf.h
+/usr/local/include/Ravelin/Rot2d.h
+/usr/local/include/Ravelin/SharedMatrixNd (1).h
+/usr/local/include/Ravelin/Matrix3d.h
+/usr/local/include/Ravelin/ConstMatrixCommon.inl
+/usr/local/include/Ravelin/SMomentum.h
+/usr/local/include/Ravelin/VectorN (1).h
+/usr/local/include/Ravelin/MatrixCommon.inl
+/usr/local/include/Ravelin/SAccel.h
+/usr/local/include/Ravelin/ConstSharedMatrixN.inl
+/usr/local/include/Ravelin/Matrix3.h
+/usr/local/include/Ravelin/AAnglef.h
+/usr/local/include/Ravelin/LinAlg.h
+/usr/local/include/Ravelin/FixedJointf.h
+/usr/local/include/Ravelin/DataMismatchException (1).h
+/usr/local/include/Ravelin/PrismaticJoint.h
+/usr/local/include/Ravelin/XVectorN.inl
+/usr/local/include/Ravelin/UniversalJointd.h
+/usr/local/include/Ravelin/VectorNd.inl
+/usr/local/include/Ravelin/SVelocityd (1).h
+/usr/local/include/Ravelin/SparseVectorNd.h
+/usr/local/include/Ravelin/Pose2 (1).h
+/usr/local/include/Ravelin/LinAlg (1).h
+/usr/local/include/Ravelin/Matrix2.h
+/usr/local/include/Ravelin/NumericalException (1).h
+/usr/local/include/Ravelin/InvalidTransformException (1).h
+/usr/local/include/Ravelin/Pose3d (1).h
+/usr/local/include/Ravelin/NonsquareMatrixException.h
+/usr/local/include/Ravelin/UndefinedAxisException.h
+/usr/local/include/Ravelin/SharedVectorNd.h
+/usr/local/include/Ravelin/LinAlgd.h
+/usr/local/include/Ravelin/SphericalJointf.h
+/usr/local/include/Ravelin/XMatrixN (1).inl
+/usr/local/include/Ravelin/LinAlg.inl
+/usr/local/include/Ravelin/ConstSharedVectorN.inl
+/usr/local/include/Ravelin/Pose3d.h
+/usr/local/include/Ravelin/SparseMatrixNf.h
+/usr/local/include/Ravelin/Origin2d.h
+/usr/local/include/Ravelin/SphericalJointd (1).h
+/usr/local/include/Ravelin/Transform3d (1).h
+/usr/local/include/Ravelin/MatrixNd.h
+/usr/local/include/Ravelin/Pose2d (1).h
+/usr/local/include/Ravelin/SpatialABInertia (1).h
+/usr/local/include/Ravelin/Vector3d.h
+/usr/local/include/Ravelin/SAccelf.h
+/usr/local/include/Ravelin/RevoluteJoint.h
+/usr/local/include/Ravelin/Origin3d.h
+/usr/local/include/Ravelin/VectorNf (1).h
+/usr/local/include/Ravelin/Vector3f.h
+/usr/local/include/Ravelin/ddefs.h
+/usr/local/include/Ravelin/VectorNd.h
+/usr/local/include/Ravelin/SharedVectorN.h
+/usr/local/include/Ravelin/NumericalException.h
+/usr/local/include/Ravelin/LinAlgf (1).h
+/usr/local/include/Ravelin/VectorNf.h
+/usr/local/include/Ravelin/MissizeException.h
+/usr/local/include/Ravelin/SForcef (1).h
+/usr/local/include/Ravelin/Quatd.h
+/usr/local/include/Ravelin/undefs (1).h
+/usr/local/include/Ravelin/UniversalJointf.h
+/usr/local/include/Ravelin/Ops.h
+/usr/local/include/Ravelin/PrismaticJointd.h
+/usr/local/include/Ravelin/SMomentumf.h
+/usr/local/include/Ravelin/Rot2f.h
+/usr/local/include/Ravelin/UndefinedAxisException (1).h
+/usr/local/include/Ravelin/Vector2f.h
+/usr/local/include/Ravelin/RowIteratorf.h
+/usr/local/include/Ravelin/SForce.h
+/usr/local/include/Ravelin/ConstSharedVectorN (1).inl
+/usr/local/include/Ravelin/DataMismatchException.h
+/usr/local/include/Ravelin/MissizeException (1).h
+/usr/local/include/Ravelin/sorted_pair (1)
+/usr/local/include/Ravelin/sorted_pair
+/usr/local/include/Ravelin/Opsf.h
+/usr/local/include/Ravelin/Jointd (1).h
+/usr/local/include/Ravelin/AAngle.h
+/usr/local/include/Ravelin/SpatialABInertia.h
+/usr/local/include/Ravelin/SpatialRBInertia.h
+/usr/local/include/Ravelin/MovingTransform3d (1).h
+/usr/local/include/Ravelin/SharedVectorN.inl
+/usr/local/include/Ravelin/Origin2d (1).h
+/usr/local/include/Ravelin/SForcef.h
+/usr/local/include/Ravelin/SphericalJointd.h
+/usr/local/include/Ravelin/undefs.h
+/usr/local/include/Ravelin/Rot2.h
+/usr/local/include/Ravelin/Matrix2 (1).h
+/usr/local/include/Ravelin/ConstMatrixN.inl
+/usr/local/include/Ravelin/Matrix2d.h
+/usr/local/include/Ravelin/Matrix3f.h
+/usr/local/include/Ravelin/RowIteratord (1).h
+/usr/local/include/Ravelin/Vector2.h
+/usr/local/include/Ravelin/SphericalJoint.h
+/usr/local/include/Ravelin/RevoluteJointf.h
+/usr/local/include/Ravelin/Opsd.h
+/usr/local/include/Ravelin/Origin2f.h
+/usr/local/include/Ravelin/Pose2f.h
+/usr/local/include/Ravelin/Vector3.h
+/usr/local/include/Ravelin/Vector2d.h
+/usr/local/include/Ravelin/Quat.h
+/usr/local/include/Ravelin/SparseVectorNd (1).h
+/usr/local/include/Ravelin/FrameException (1).h
+/usr/local/include/Ravelin/MovingTransform3f.h
+/usr/local/include/Ravelin/SparseMatrixNd.h
+/usr/local/include/Ravelin/Transform2.h
+/usr/local/include/Ravelin/SpatialRBInertiaf.h
+/usr/local/include/Ravelin/InvalidTransformException.h
+/usr/local/include/Ravelin/VectorNd (1).h
+/usr/local/include/Ravelin/Transform3 (1).h
+/usr/local/include/Ravelin/SAcceld (1).h
+/usr/local/include/Ravelin/VectorN.inl
+/usr/local/include/Ravelin/MatrixNf (1).h
+/usr/local/include/Ravelin/SparseVectorN.h
+/usr/local/include/Ravelin/Transform2 (1).h
+/usr/local/include/Ravelin/ColumnIteratorf.h
+/usr/local/include/Ravelin/SVector6.h
+/usr/local/include/Ravelin/FixedJoint (1).h
+/usr/local/include/Ravelin/MovingTransform3f (1).h
+/usr/local/include/Ravelin/SpatialABInertiaf.h
+/usr/local/include/Ravelin/SingularException.h
+/usr/local/include/Ravelin/Transform3f.h
+/usr/local/include/Ravelin/SForced.h
+/usr/local/include/Ravelin/UniversalJointf (1).h
+/usr/local/include/Ravelin/Vector3d (1).h
+/usr/local/include/Ravelin/AAngled.h
+/usr/local/include/Ravelin/Transform2f (1).h
+/usr/local/include/Ravelin/RowIterator (1).h
+/usr/local/include/Ravelin/ColumnIterator.h
+/usr/local/include/Ravelin/cblas.h
+/usr/local/include/Ravelin/FixedJointf (1).h
+/usr/local/include/Ravelin/Joint.h
+/usr/local/include/Ravelin/select
+/usr/local/include/Ravelin/Rot2f (1).h
+/usr/local/include/Ravelin/SVector6f.h
+/usr/local/include/Ravelin/SharedMatrixNf (1).h

@@ -216,23 +216,6 @@ namespace gazebo
       std::cout << "joint angles: " << theta << std::endl;
       std::cout << "Jacobian: " << std::endl << J;
 
-      theta[0] = 2.1374625;  theta[1] = -0.66361164;  theta[2] = 1.7787649;
-      SetConfig(theta);
-      Ravelin::MatrixNd J = CalcJacobian(theta[0], theta[1], theta[2]);      
-      std::cout << "joint angles: " << theta << std::endl;
-      std::cout << "Jacobian: " << std::endl << J;
-
-      theta[0] = 1.875154;  theta[1] = 2.5864566;  theta[2] = -1.9003408;
-      SetConfig(theta);
-      Ravelin::MatrixNd J = CalcJacobian(theta[0], theta[1], theta[2]);      
-      std::cout << "joint angles: " << theta << std::endl;
-      std::cout << "Jacobian: " << std::endl << J;
-
-      theta[0] = -1.35326;  theta[1] = 1.6853362;  theta[2] = -1.3962827;
-      SetConfig(theta);
-      Ravelin::MatrixNd J = CalcJacobian(theta[0], theta[1], theta[2]);      
-      std::cout << "joint angles: " << theta << std::endl;
-      std::cout << "Jacobian: " << std::endl << J;
       // exit when we're done
       exit(-1);
     }
