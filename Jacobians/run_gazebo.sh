@@ -1,0 +1,17 @@
+#!/bin/bash
+# script to set environment variables for Gazebo for Homework 3
+# 17 Feb 2015 - Shankar Kulumani
+
+export GAZEBO_MODEL_PATH="/media/sf_VirtualBox_Shared/Jacobians"
+export GAZEBO_PLUGIN_PATH="/media/sf_VirtualBox_Shared/Jacobians/build"
+export LD_LIBRARY_PATH="/media/sf_VirtualBox_Shared/Ravelin/build"
+
+cd ./build
+cmake ..
+make
+cd ..
+# change the filename here for different experiments
+# gazebo -u --verbose planar2.world
+gzserver --verbose planar.world
+
+

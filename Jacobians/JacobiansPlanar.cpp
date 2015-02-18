@@ -120,13 +120,13 @@ namespace gazebo
       // setup the Jacobian: 3 degrees of freedom x 3 joints
       Ravelin::MatrixNd J(3,3);
 
-      math::Vector3 Joint1 = Cross(JointAxis,p-p1);
-      math::Vector3 Joint2 = Cross(JointAxis,p-p2);
-      math::Vector3 Joint2 = Cross(JointAxis,p-p2);            
+      math::Vector3 Joint1 = JointAxis.Cross(p-p1);
+      math::Vector3 Joint2 = JointAxis.Cross(p-p2);
+      math::Vector3 Joint3 = JointAxis.Cross(p-p3);            
 
-      J(X,J1) = Joint1(0);     J(X,J2) = Joint2(0);     J(X,J3) = Joint3(0); 
-      J(Y,J1) = Joint1(1);     J(Y,J2) = Joint2(1);     J(Y,J3) = Joint3(1); 
-      J(THETA,J1) = Joint1(2); J(THETA,J2) = Joint2(2); J(THETA,J3) = Joint3(2); 
+      J(X,J1) = Joint1[0];     J(X,J2) = Joint2[0];     J(X,J3) = Joint3[0]; 
+      J(Y,J1) = Joint1[1];     J(Y,J2) = Joint2[1];     J(Y,J3) = Joint3[1]; 
+      J(THETA,J1) = Joint1[2]; J(THETA,J2) = Joint2[2]; J(THETA,J3) = Joint3[2]; 
 
       return J;
     }
