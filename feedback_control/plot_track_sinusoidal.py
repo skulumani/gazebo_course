@@ -3,7 +3,7 @@ import pylab
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.lines as lines
-
+import math 
 # setup font
 font =  {'family' : 'sans-serif',
          'color'  : 'black',
@@ -27,12 +27,13 @@ plt.plot(t,y1[:,0],'k' ,label='Desired (joint 1)')
 plt.plot(t,y2[:,0],'r' ,label='Actual (joint 1)')
 
 # add titles, labels, and legend
-plt.title('Desired vs. actual joint angles for tracking sinusoidal trajectory', fontdict=font)
+plt.title('Joint 1 Tracking Response sinusoidal trajectory', fontdict=font)
 plt.xlabel('Time', fontdict=font)
 plt.ylabel('Joint angle', fontdict=font)
 plt.legend(loc=1, shadow=True)
-
-# show the plot
+plt.axis([0,10,-math.pi, math.pi])
+# show the 
+plt.savefig('plot_track_sinusoidal.png')
 plt.show()
 
 

@@ -60,17 +60,15 @@ namespace gazebo
     // Called by the world update start event
     public: void OnUpdate(const common::UpdateInfo & /*_info*/)
     {
-      const double CHANGEME = 0.0; 
-
-      static double sum_p1_err = CHANGEME;
-      static double sum_p2_err = CHANGEME;
+      static double sum_p1_err = 0.0;
+      static double sum_p2_err = 0.0;
 
       // set the desired positions and velocities
-      const double J1_DES = -M_PI, J2_DES = 0.0;
+      const double J1_DES = 0.0, J2_DES = 0.0;
       const double vJ1_DES = 0.0, vJ2_DES = 0.0;
 
       // TODO: setup gains
-      const double KP = CHANGEME, KV = CHANGEME, KI = CHANGEME;
+      const double KP = 150, KV = 30, KI = 0.05;
 
       // output current and desired state
       _output_current << _j1->GetAngle(0).Radian() << " " << _j2->GetAngle(0).Radian() << std::endl;
@@ -83,20 +81,22 @@ namespace gazebo
       double dtheta2 = _j2->GetVelocity(0);  
 
       // TODO: setup position and velocity errors
-      const double perr1 = CHANGEME; 
-      const double derr1 = CHANGEME;
-      const double perr2 = CHANGEME;
-      const double derr2 = CHANGEME;
+      const double perr1 = J1_DES-theta1;
+      const double derr1 = vJ1_DES-dtheta1;
+      const double perr2 = J2_DES-theta2;
+      const double derr2 = vJ2_DES-dtheta2;
 
       // TODO: compute torques
-      double tau1 = CHANGEME;
-      double tau2 = CHANGEME;
+      double tau1 = KP*perr1 + KV*derr1 + KI * sum_p1_err;
+      double tau2 = KP*perr2 + KV*derr2 + KI * sum_p1_err;
 
       // set torques
       this->_j1->SetForce(0, tau1);
       this->_j2->SetForce(0, tau2);
 
       // TODO: update p1 and p2 error sums with position errors
+      sum_p1_err += perr1;
+      sum_p2_err += perr2;
     }
 
     // Pointer to the update event connection

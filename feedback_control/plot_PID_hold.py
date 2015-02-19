@@ -8,10 +8,10 @@ import matplotlib.lines as lines
 # TODO: set values here 
 # see figure 1 in homework for definition of variables
 set_point = 0.0 
-rise_time = 1.0 
-peak_time = 2.0
-overshoot = 0.2
-settling_time = 3.0
+rise_time = 0.747037 
+peak_time = 0.974048
+overshoot = 0.136755
+settling_time = 1.284063
 
 # Error bands are at y = (1 +/- delta)
 error_band_delta = 0.05
@@ -45,7 +45,7 @@ plt.plot(t,y2[:,0],'r' ,label='Actual (joint 1)')
 
 # set x limit
 axPlot = plt.subplot(111)
-axPlot.set_xlim(-.001, 7)
+axPlot.set_xlim(-.001, 10)
 
 # add titles, labels, and legend
 plt.title('Desired vs. actual joint angles for (PID) hold task', fontdict=font)
@@ -80,9 +80,10 @@ plt.axhline(y=set_point+error_band_delta, color='k',linestyle='--')
 #plt.plot([0, y1[:,0].size*DT], [-1.5, -1.5], '--', lw=1.0)
 plt.annotate('error band', xy=(10.1, set_point))
 
+# save the plot
+plt.savefig('plot_PID_hold.png')
 # show the plot
 plt.show()
 
-# save the plot
-plt.savefig('plot_PID_hold.png')
+
 
