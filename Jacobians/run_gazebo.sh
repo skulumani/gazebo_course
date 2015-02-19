@@ -4,7 +4,7 @@
 
 export GAZEBO_MODEL_PATH="/home/shankar/CSCI6525/gazebo_course/Jacobians"
 export GAZEBO_PLUGIN_PATH="/home/shankar/CSCI6525/gazebo_course/Jacobians/build"
-export LD_LIBRARY_PATH="/home/shankar/CSCI6525/gazebo_course/Jacobians/Ravelin/build"
+export LD_LIBRARY_PATH="/home/shankar/CSCI6525/gazebo_course/Ravelin/build"
 
 cd ./build
 cmake ..
