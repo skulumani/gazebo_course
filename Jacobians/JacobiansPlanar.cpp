@@ -123,10 +123,11 @@ namespace gazebo
       math::Vector3 Joint1 = JointAxis.Cross(p-p1);
       math::Vector3 Joint2 = JointAxis.Cross(p-p2);
       math::Vector3 Joint3 = JointAxis.Cross(p-p3);            
-
+        
+      // Not the whole Jacobian. Only rows 1,2, 6
       J(X,J1) = Joint1[0];     J(X,J2) = Joint2[0];     J(X,J3) = Joint3[0]; 
       J(Y,J1) = Joint1[1];     J(Y,J2) = Joint2[1];     J(Y,J3) = Joint3[1]; 
-      J(THETA,J1) = Joint1[2]; J(THETA,J2) = Joint2[2]; J(THETA,J3) = Joint3[2]; 
+      J(THETA,J1) = JointAxis[2]; J(THETA,J2) = JointAxis[2]; J(THETA,J3) = JointAxis[2]; 
 
       return J;
     }
