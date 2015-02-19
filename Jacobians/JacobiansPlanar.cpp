@@ -216,23 +216,69 @@ namespace gazebo
       std::cout << "joint angles: " << theta << std::endl;
       std::cout << "Jacobian: " << std::endl << J;
 
+      // DEBUG CHECKS
       theta[0] = 2.1374625;  theta[1] = -0.66361164;  theta[2] = 1.7787649;
       SetConfig(theta);
-      Ravelin::MatrixNd J = CalcJacobian(theta[0], theta[1], theta[2]);      
+      J = CalcJacobian(theta[0], theta[1], theta[2]);      
       std::cout << "joint angles: " << theta << std::endl;
       std::cout << "Jacobian: " << std::endl << J;
 
       theta[0] = 1.875154;  theta[1] = 2.5864566;  theta[2] = -1.9003408;
       SetConfig(theta);
-      Ravelin::MatrixNd J = CalcJacobian(theta[0], theta[1], theta[2]);      
+      J = CalcJacobian(theta[0], theta[1], theta[2]);      
       std::cout << "joint angles: " << theta << std::endl;
       std::cout << "Jacobian: " << std::endl << J;
 
-      theta[0] = -1.35326;  theta[1] = 1.6853362;  theta[2] = -1.3962827;
+      theta[0] = -1.035326;  theta[1] = 1.6853362;  theta[2] = -1.3962827;
       SetConfig(theta);
-      Ravelin::MatrixNd J = CalcJacobian(theta[0], theta[1], theta[2]);      
+      J = CalcJacobian(theta[0], theta[1], theta[2]);      
       std::cout << "joint angles: " << theta << std::endl;
       std::cout << "Jacobian: " << std::endl << J;
+
+      theta[0] = 0.33910323;  theta[1] = -0.14201851;  theta[2] = 0.8097199;
+      SetConfig(theta);
+      J = CalcJacobian(theta[0], theta[1], theta[2]);      
+      std::cout << "joint angles: " << theta << std::endl;
+      std::cout << "Jacobian: " << std::endl << J;
+
+      theta[0] = -0.84958421;  theta[1] = 0.084200402;  theta[2] = 2.8414432;
+      SetConfig(theta);
+      J = CalcJacobian(theta[0], theta[1], theta[2]);      
+      std::cout << "joint angles: " << theta << std::endl;
+      std::cout << "Jacobian: " << std::endl << J;
+
+      theta[0] = 2.6150307;  theta[1] = 0.85270194;  theta[2] = 1.3653169;
+      SetConfig(theta);
+      J = CalcJacobian(theta[0], theta[1], theta[2]);      
+      std::cout << "joint angles: " << theta << std::endl;
+      std::cout << "Jacobian: " << std::endl << J;
+
+      theta[0] = -2.2518776;  theta[1] = 0.67210527;  theta[2] = -3.0391731;
+      SetConfig(theta);
+      J = CalcJacobian(theta[0], theta[1], theta[2]);      
+      std::cout << "joint angles: " << theta << std::endl;
+      std::cout << "Jacobian: " << std::endl << J;
+
+      theta[0] = -1.6154901;  theta[1] = -2.2793412;  theta[2] = 1.9111989;
+      SetConfig(theta);
+      J = CalcJacobian(theta[0], theta[1], theta[2]);      
+      std::cout << "joint angles: " << theta << std::endl;
+      std::cout << "Jacobian: " << std::endl << J;
+
+      theta[0] = -2.1571489;  theta[1] = -0.62238473;  theta[2] = -2.3260952;
+      SetConfig(theta);
+      J = CalcJacobian(theta[0], theta[1], theta[2]);      
+      std::cout << "joint angles: " << theta << std::endl;
+      std::cout << "Jacobian: " << std::endl << J;
+
+      theta[0] = -2.4579268;  theta[1] = 3.1348352;  theta[2] = -1.7702441;
+      SetConfig(theta);
+      J = CalcJacobian(theta[0], theta[1], theta[2]);      
+      std::cout << "joint angles: " << theta << std::endl;
+      std::cout << "Jacobian: " << std::endl << J;
+
+      //END OF DUBUG
+
       // exit when we're done
       exit(-1);
     }
