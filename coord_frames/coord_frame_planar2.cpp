@@ -62,19 +62,19 @@ namespace gazebo
       double theta3 = _j3->GetAngle(0).Radian();
 
       // TODO: compute the first pose: frame 0' defined relative to frame 0
-
+      _0P0x.rot.SetFromAxis(0,0,1,theta1);
       // TODO: compute the second pose: frame 1 defined relative to frame 0' 
-      
+      _0xP1.pos = math::Vector3(2,0,0);
       // TODO: compute the third pose: frame 1' defined relative to frame 1
-      
+      _1P1x.rot.SetFromAxis(0,0,1,theta2);
       // TODO: compute the fourth pose: frame 2 defined relative to frame 1' 
-
+	  _1xP2.pos = math::Vector3(1.333,0,0);
       // TODO: compute the fifth pose: frame 2' defined relative to frame 2 
-      
+      _2P2x.rot.SetFromAxis(0,0,1,theta3);
       // TODO: compute the sixth pose: frame 3 defined relative to frame 2' 
-
+	  _2xP3.pos = math::Vector3(0.8712,0,0);
       // TODO: compute the seventh pose: frame c defined relative to frame 3 
-
+	  _3Pc.rot.SetFromAxis(0,0,1,-M_PI/2);
       // convert each pose to a Matrix4 
       math::Matrix4 _0T0x = ToMatrix(_0P0x);
       math::Matrix4 _0xT1 = ToMatrix(_0xP1);
@@ -85,7 +85,7 @@ namespace gazebo
       math::Matrix4 _3Tc = ToMatrix(_3Pc);
 
       // TODO: compute _0Tc from matrices above
-      math::Matrix4 _0Tc;
+      math::Matrix4 _0Tc = _0T0x * _0xT1 * _1T1x * _1xT2 * _2T2x * _2xT3 * _3Tc;
       
       // set the pose for the widget 
       widget->SetLinkWorldPose(_0Tc.GetAsPose(), "link");
