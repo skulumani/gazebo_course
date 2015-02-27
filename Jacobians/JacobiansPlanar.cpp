@@ -89,7 +89,7 @@ namespace gazebo
       // TODO: compute the third transform: frame 1' to 1
       _1P1x.rot.SetFromAxis(0,0,1,theta2);
       // TODO: compute the fourth transform: frame 2 to 1' 
-	  _1xP2.pos = math::Vector3(1.333,0,0);
+	  _1xP2.pos = math::Vector3(4.0/3,0,0);
       // TODO: compute the fifth transform: frame 2' to 2 
       _2P2x.rot.SetFromAxis(0,0,1,theta3);      
       // TODO: compute the fourth transform: frame 3 to 2' 
