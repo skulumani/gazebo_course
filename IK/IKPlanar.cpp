@@ -232,6 +232,19 @@ const math::Vector3 ORIGIN1(0.0, 0.0, 0.0);  // origin of frame 1
     private: double WrapAngle(double x)
     {
       // TODO: implement this
+      if (x > M_PI) 
+        {
+           double x_out = x - 2.0*M_PI;  
+        } 
+      else if ( x < - M_PI)
+        {
+            double x_out = x + 2.0*M_PI;
+        } 
+      else 
+        {
+            double x_out = x;
+        }
+    return x_out
     }
 
     // computes the operational space differential between two poses
@@ -246,13 +259,11 @@ const math::Vector3 ORIGIN1(0.0, 0.0, 0.0);  // origin of frame 1
       math::Matrix4 Tdes = toMatrix(xdes); 
 
       // TODO: get the angles of rotation about z from Tcurrent and Tdes
-		math::Matrix4::IDENTITY eye4;
-		
-		math::Matrix4 w_skew = Tdes * Tcurrent.transpose - eye4;
-		math::Vector3 w_vec(1.0/2 * (w_skew[2,1] - w_skew[1,2]), 1.0/2 * (w_skew[0,2] - w_skew[2,0]), 1.0/2 * (w_skew[1,0] - w_skew[0,1]);
+      double theta_d = atan2(Tdes[1][0],Tdes[0][0]);
+      double theta_c = atan2(Tcurrent[1][0],Tcurrent[0][0]);
 
       // TODO: compute the difference in angles
-      double theta_diff = w_vec[2];
+      double theta_diff = theta_d - theta_c;
 
       // wrap the differential to [-pi,pi]
       theta_diff = WrapAngle(theta_diff);
@@ -291,7 +302,7 @@ const math::Vector3 ORIGIN1(0.0, 0.0, 0.0);  // origin of frame 1
       while (true)
       {
         // TODO: get the current end-effector pose
-        math::Pose x;// = FILL ME IN 
+        math::Pose x = FKin(theta1, theta2, theta3);// = FILL ME IN 
 
         // get the error between the current and desired poses
         math::Vector3 deltax = CalcOSDiff(x, target); 
@@ -316,10 +327,10 @@ const math::Vector3 ORIGIN1(0.0, 0.0, 0.0);  // origin of frame 1
         std::cout << "dx norm: " << DX_NORM << "  minimum dx observed: " << min_dx << std::endl;
 
         // TODO: get the Jacobian
-        Ravelin::MatrixNd J;// = FILL ME IN 
+        Ravelin::MatrixNd J = CalcJacobian(theta1,theta2, theta3);// = FILL ME IN 
 
         // TODO: "solve" J*dq = dx for _dq using SolveJ or TransposeJ
-
+        Ravelin::VectorNd dq = SolveJ(J, dx) 
         // do backtracking search to determine value of t 
         const double ALPHA = 0.05, BETA = 0.5;
         double t = 1.0;
