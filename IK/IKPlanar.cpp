@@ -16,7 +16,7 @@
 namespace gazebo
 {
   // converts a Pose to a Gazebo Matrix4
-  math::Matrix4 toMatrix(const math::Pose& p)
+  math::Matrix4 ToMatrix(const math::Pose& p)
   {
     math::Matrix3 m = p.rot.GetAsMatrix3();
     math::Matrix4 T;
@@ -129,13 +129,15 @@ namespace gazebo
     // computes the forward kinematics function for the planar manipulator 
     private: math::Pose FKin(double theta1, double theta2, double theta3)
     {
-      math::Matrix4 _0T0x, _0xT1, _1T1x, _1xT2, _2T2x, _2xT3;
-      // get the joint angles
-      double theta1 = _j1->GetAngle(0).Radian();
-      double theta2 = _j2->GetAngle(0).Radian();
-      double theta3 = _j3->GetAngle(0).Radian();
-	  
       
+      // get the joint angles
+      theta1 = _j1->GetAngle(0).Radian();
+      theta2 = _j2->GetAngle(0).Radian();
+      theta3 = _j3->GetAngle(0).Radian();
+	  
+     // setup the first pose
+      math::Pose _0P0x, _0xP1, _1P1x, _1xP2, _2P2x, _2xP3, _3Pc; 
+      math::Matrix4 _0T0x, _0xT1, _1T1x, _1xT2, _2T2x, _2xT3;
       _0P0x.rot.SetFromAxis(0,0,1,theta1);
        
       _0xP1.pos = math::Vector3(2,0,0);
@@ -149,12 +151,12 @@ namespace gazebo
 	  _2xP3.pos = math::Vector3(0.8712,0,0);
       	  
       // convert each pose to a Matrix4 
-      math::Matrix4 _0T0x = ToMatrix(_0P0x);
-      math::Matrix4 _0xT1 = ToMatrix(_0xP1);
-      math::Matrix4 _1T1x = ToMatrix(_1P1x);
-      math::Matrix4 _1xT2 = ToMatrix(_1xP2);
-      math::Matrix4 _2T2x = ToMatrix(_2P2x);
-      math::Matrix4 _2xT3 = ToMatrix(_2xP3);
+       _0T0x = ToMatrix(_0P0x);
+       _0xT1 = ToMatrix(_0xP1);
+       _1T1x = ToMatrix(_1P1x);
+       _1xT2 = ToMatrix(_1xP2);
+       _2T2x = ToMatrix(_2P2x);
+       _2xT3 = ToMatrix(_2xP3);
       
       // get the manipulator end pose
       return (_0T0x * _0xT1 * _1T1x * _1xT2 * _2T2x * _2xT3).GetAsPose();
@@ -231,32 +233,33 @@ const math::Vector3 ORIGIN1(0.0, 0.0, 0.0);  // origin of frame 1
     // "wraps" angle on a differential to interval [-pi, pi]
     private: double WrapAngle(double x)
     {
+    double x_out;
       // TODO: implement this
       if (x > M_PI) 
         {
-           double x_out = x - 2.0*M_PI;  
+           x_out = x - 2.0*M_PI;  
         } 
       else if ( x < - M_PI)
         {
-            double x_out = x + 2.0*M_PI;
+            x_out = x + 2.0*M_PI;
         } 
       else 
         {
-            double x_out = x;
+            x_out = x;
         }
-    return x_out
+    return x_out;
     }
 
     // computes the operational space differential between two poses
     private: math::Vector3 CalcOSDiff(const math::Pose& xcurrent, const math::Pose& xdes)
     {
       const unsigned X = 0, Y = 1, Z = 2;
-      const double INFINITY = std::numeric_limits<double>::max();
-      const double CHANGEME = INFINITY;
+      const double INF = std::numeric_limits<double>::max();
+      const double CHANGEME = INF;
 
       // get the transformation matrices for xcurrent and xdes
-      math::Matrix4 Tcurrent = toMatrix(xcurrent); 
-      math::Matrix4 Tdes = toMatrix(xdes); 
+      math::Matrix4 Tcurrent = ToMatrix(xcurrent); 
+      math::Matrix4 Tdes = ToMatrix(xdes); 
 
       // TODO: get the angles of rotation about z from Tcurrent and Tdes
       double theta_d = atan2(Tdes[1][0],Tdes[0][0]);
@@ -330,13 +333,14 @@ const math::Vector3 ORIGIN1(0.0, 0.0, 0.0);  // origin of frame 1
         Ravelin::MatrixNd J = CalcJacobian(theta1,theta2, theta3);// = FILL ME IN 
 
         // TODO: "solve" J*dq = dx for _dq using SolveJ or TransposeJ
-        Ravelin::VectorNd dq = SolveJ(J, dx) 
+        Ravelin::VectorNd dq;
+        SolveJ(J, dx, dq); 
         // do backtracking search to determine value of t 
         const double ALPHA = 0.05, BETA = 0.5;
         double t = 1.0;
 
         // TODO: compute f(q + dq*t)
-        math::Pose xprime;// = FILL ME IN
+        math::Pose xprime = FKin(theta1+dq[0]*t,theta2+dq[1]*t,theta3+dq[2]*t);// = FILL ME IN
         math::Vector3 deltax_prime = CalcOSDiff(xprime, target); 
         while (0.5*deltax_prime.GetLength() > 0.5*deltax.GetLength() + ALPHA*t*grad.dot(_dq))
         {
@@ -349,7 +353,7 @@ const math::Vector3 ORIGIN1(0.0, 0.0, 0.0);  // origin of frame 1
 
           // TODO: recompute f(q + dq*t)
           // xprime = FILL ME IN 
-
+            xprime = FKin(theta1+dq[0]*t,theta2+dq[1]*t,theta3+dq[2]*t);
           // recompute deltax_prime
           deltax_prime = CalcOSDiff(xprime, target); 
         }
@@ -371,6 +375,9 @@ const math::Vector3 ORIGIN1(0.0, 0.0, 0.0);  // origin of frame 1
         }
 
         // TODO: update thetas using _dq
+        theta1 = theta1 + _dq[0];
+        theta2 = theta1 + _dq[1];
+        theta3 = theta1 + _dq[2];
       }
 
       // update qdes using the IK solution: this will allow the robot to go
