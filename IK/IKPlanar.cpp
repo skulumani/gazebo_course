@@ -371,6 +371,7 @@ const math::Vector3 ORIGIN1(0.0, 0.0, 0.0);  // origin of frame 1
           theta2 = (double) rand() / RAND_MAX * 2.0 * M_PI;
           theta3 = (double) rand() / RAND_MAX * 2.0 * M_PI;
           iter = 0;
+          restarts++;
           continue;
         }
 
@@ -385,7 +386,7 @@ const math::Vector3 ORIGIN1(0.0, 0.0, 0.0);  // origin of frame 1
       _qdes += _dq;
 
       // indicate IK solution found
-      std::cout << "IK solution found after " << restarts << " and " << iter << " iterations" << std::endl;
+      std::cout << "IK solution found after " << restarts << " restarts and " << iter << " iterations" << std::endl;
     }
 
     // Called by the world update start event

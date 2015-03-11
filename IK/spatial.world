@@ -11,10 +11,28 @@
     <include>
       <uri>model://ground_plane</uri>
     </include>
+
+<model name="ur10a">
     <include>
       <uri>model://ur10</uri>
+      <pose>0 0 2 0 0 0</pose>
       <plugin name="IK" filename="libIKSpatial.so"/>
     </include>
+
+    <!-- affix the ur10 to the world -->
+    <joint name="affix" type="revolute">
+      <parent>world</parent>
+      <child>ur10a::ur10::base</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <upper>0</upper>
+            <lower>0</lower>
+          </limit>
+        </axis>
+      </joint>
+</model>
+
   </world>
 
 </model>
