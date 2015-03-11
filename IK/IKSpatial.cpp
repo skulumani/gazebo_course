@@ -242,14 +242,24 @@ namespace gazebo
 
       // TODO: compute the translational difference from T to Tdes and put
       //       that into dx[0], dx[1], dx[2] 
-
+        dx[0] = Tdes[0,3] - T[0,3];
+        dx[1] = Tdes[1,3] - T[1,3];
+        dx[2] = Tdes[2,3] - T[2,3];
       // get the necessary rotation matrices to compute angular rotation
       math::Matrix3 Rdes = Tdes.GetRotation().GetAsMatrix3();
       math::Matrix3 RT = T.GetRotation().GetInverse().GetAsMatrix3();
 
       // TODO: compute the angular difference from R (not transpose(R) = RT)
       //       to Rdes and put that into dx[3], dx[4], dx[5]
-
+        math::Matrix3 I
+        I[0][0] = 1; I[0][1] = 0; I[0][2] = 0;
+        I[1][0] = 0; I[1][1] = 1; I[1][2] = 0;
+        I[2][0] = 0; I[2][1] = 0; I[2][2] = 1;
+        math::Matrix3 w_skew = Rdes*RT - I;
+        
+        dx[3] = 1.0/2.0 * (w_skew[2][1]-w_skew[1][2]);
+        dx[4] = 1.0/2.0 * (w_skew[0][2]-w_skew[2][0]);
+        dx[3] = 1.0/2.0 * (w_skew[1][0]-w_skew[0][1]);
       // zero parts of dx that we do not want to use for IK
       if (_do_position)
         dx[3] = dx[4] = dx[5] = 0.0;
