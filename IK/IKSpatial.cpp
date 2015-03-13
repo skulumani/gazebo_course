@@ -182,9 +182,13 @@ namespace gazebo
 
       // TODO: iterate over all joints (see code immediately above that shows
       //       how to do this) for computing the Jacobian
-      for (unsigned i=0; i< nDOF(_model); i++)
+      // compute the other end effector poses
+      Ravelin::VectorNd j(NJOINTS);
+      for (unsigned i=0; i< NJOINTS; i++)
       {
-
+        q[i] += DQ;
+        j[i] = CalcOSDiff(x, FKin(q));
+        q[i] -= DQ;
       }
       // restore the configuration of the model
       _model->SetState(ms);
