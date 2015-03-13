@@ -182,7 +182,10 @@ namespace gazebo
 
       // TODO: iterate over all joints (see code immediately above that shows
       //       how to do this) for computing the Jacobian
+      for (unsigned i=0; i< nDOF(_model); i++)
+      {
 
+      }
       // restore the configuration of the model
       _model->SetState(ms);
 
