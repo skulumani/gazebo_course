@@ -157,7 +157,7 @@ namespace gazebo
     private: Ravelin::MatrixNd CalcJacobianNumerical(double q[6])
     {
       const double DQ = 1e-6;
-
+      const unsigned NJOINTS = 6;
       // save the state of the model
       physics::ModelState ms(_model);
 
@@ -187,7 +187,7 @@ namespace gazebo
       for (unsigned i=0; i< NJOINTS; i++)
       {
         q[i] += DQ;
-        j[i] = CalcOSDiff(x, FKin(q));
+        j[i] = CalcOSDiff(x, FKin(q)).norm();
         q[i] -= DQ;
       }
       // restore the configuration of the model
@@ -219,7 +219,8 @@ namespace gazebo
 
       // TODO: compute the angular difference from R (not transpose(R) = RT)
       //       to Rdes and put that into dx[3], dx[4], dx[5]
-        math::Matrix3 I
+        math::Matrix3 I[2][2];
+
         I[0][0] = 1; I[0][1] = 0; I[0][2] = 0;
         I[1][0] = 0; I[1][1] = 1; I[1][2] = 0;
         I[2][0] = 0; I[2][1] = 0; I[2][2] = 1;

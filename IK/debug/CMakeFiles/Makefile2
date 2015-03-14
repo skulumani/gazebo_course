@@ -50,7 +50,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/shankar/CSCI6525/gazebo_course/IK
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/shankar/CSCI6525/gazebo_course/IK/build
+CMAKE_BINARY_DIR = /home/shankar/CSCI6525/gazebo_course/IK/debug
 
 #=============================================================================
 # Target rules for target CMakeFiles/IKPlanar.dir
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/shankar/CSCI6525/gazebo_course/IK/build
 CMakeFiles/IKPlanar.dir/all:
 	$(MAKE) -f CMakeFiles/IKPlanar.dir/build.make CMakeFiles/IKPlanar.dir/depend
 	$(MAKE) -f CMakeFiles/IKPlanar.dir/build.make CMakeFiles/IKPlanar.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/shankar/CSCI6525/gazebo_course/IK/build/CMakeFiles  1
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/shankar/CSCI6525/gazebo_course/IK/debug/CMakeFiles  1
 	@echo "Built target IKPlanar"
 .PHONY : CMakeFiles/IKPlanar.dir/all
 
@@ -69,9 +69,9 @@ all: CMakeFiles/IKPlanar.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/IKPlanar.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/shankar/CSCI6525/gazebo_course/IK/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/shankar/CSCI6525/gazebo_course/IK/debug/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/IKPlanar.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/shankar/CSCI6525/gazebo_course/IK/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/shankar/CSCI6525/gazebo_course/IK/debug/CMakeFiles 0
 .PHONY : CMakeFiles/IKPlanar.dir/rule
 
 # Convenience name for target.
@@ -94,7 +94,7 @@ clean: CMakeFiles/IKPlanar.dir/clean
 CMakeFiles/IKSpatial.dir/all:
 	$(MAKE) -f CMakeFiles/IKSpatial.dir/build.make CMakeFiles/IKSpatial.dir/depend
 	$(MAKE) -f CMakeFiles/IKSpatial.dir/build.make CMakeFiles/IKSpatial.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/shankar/CSCI6525/gazebo_course/IK/build/CMakeFiles  2
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/shankar/CSCI6525/gazebo_course/IK/debug/CMakeFiles  2
 	@echo "Built target IKSpatial"
 .PHONY : CMakeFiles/IKSpatial.dir/all
 
@@ -104,9 +104,9 @@ all: CMakeFiles/IKSpatial.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/IKSpatial.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/shankar/CSCI6525/gazebo_course/IK/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/shankar/CSCI6525/gazebo_course/IK/debug/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/IKSpatial.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/shankar/CSCI6525/gazebo_course/IK/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/shankar/CSCI6525/gazebo_course/IK/debug/CMakeFiles 0
 .PHONY : CMakeFiles/IKSpatial.dir/rule
 
 # Convenience name for target.

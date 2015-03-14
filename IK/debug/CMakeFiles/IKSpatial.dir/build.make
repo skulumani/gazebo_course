@@ -38,7 +38,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/shankar/CSCI6525/gazebo_course/IK
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/shankar/CSCI6525/gazebo_course/IK/build
+CMAKE_BINARY_DIR = /home/shankar/CSCI6525/gazebo_course/IK/debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/IKSpatial.dir/depend.make
@@ -51,7 +51,7 @@ include CMakeFiles/IKSpatial.dir/flags.make
 
 CMakeFiles/IKSpatial.dir/IKSpatial.cpp.o: CMakeFiles/IKSpatial.dir/flags.make
 CMakeFiles/IKSpatial.dir/IKSpatial.cpp.o: ../IKSpatial.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/shankar/CSCI6525/gazebo_course/IK/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/shankar/CSCI6525/gazebo_course/IK/debug/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/IKSpatial.dir/IKSpatial.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/IKSpatial.dir/IKSpatial.cpp.o -c /home/shankar/CSCI6525/gazebo_course/IK/IKSpatial.cpp
 
@@ -98,6 +98,6 @@ CMakeFiles/IKSpatial.dir/clean:
 .PHONY : CMakeFiles/IKSpatial.dir/clean
 
 CMakeFiles/IKSpatial.dir/depend:
-	cd /home/shankar/CSCI6525/gazebo_course/IK/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/shankar/CSCI6525/gazebo_course/IK /home/shankar/CSCI6525/gazebo_course/IK /home/shankar/CSCI6525/gazebo_course/IK/build /home/shankar/CSCI6525/gazebo_course/IK/build /home/shankar/CSCI6525/gazebo_course/IK/build/CMakeFiles/IKSpatial.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/shankar/CSCI6525/gazebo_course/IK/debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/shankar/CSCI6525/gazebo_course/IK /home/shankar/CSCI6525/gazebo_course/IK /home/shankar/CSCI6525/gazebo_course/IK/debug /home/shankar/CSCI6525/gazebo_course/IK/debug /home/shankar/CSCI6525/gazebo_course/IK/debug/CMakeFiles/IKSpatial.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/IKSpatial.dir/depend
 

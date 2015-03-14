@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/shankar/CSCI6525/gazebo_course/IK/IKPlanar.cpp" "/home/shankar/CSCI6525/gazebo_course/IK/build/CMakeFiles/IKPlanar.dir/IKPlanar.cpp.o"
+  "/home/shankar/CSCI6525/gazebo_course/IK/IKPlanar.cpp" "/home/shankar/CSCI6525/gazebo_course/IK/debug/CMakeFiles/IKPlanar.dir/IKPlanar.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -15,7 +15,7 @@ SET(CMAKE_TARGET_LINKED_INFO_FILES
 # The include file search paths:
 SET(CMAKE_C_TARGET_INCLUDE_PATH
   "/usr/include/gazebo-5.0"
-  "/usr/include/sdformat-2.2"
+  "/usr/include/sdformat-2.3"
   )
 SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
 SET(CMAKE_Fortran_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})

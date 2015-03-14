@@ -129,12 +129,7 @@ namespace gazebo
     // computes the forward kinematics function for the planar manipulator 
     private: math::Pose FKin(double theta1, double theta2, double theta3)
     {
-      
-      // get the joint angles
-      theta1 = _j1->GetAngle(0).Radian();
-      theta2 = _j2->GetAngle(0).Radian();
-      theta3 = _j3->GetAngle(0).Radian();
-	  
+
      // setup the first pose
       math::Pose _0P0x, _0xP1, _1P1x, _1xP2, _2P2x, _2xP3, _3Pc; 
       math::Matrix4 _0T0x, _0xT1, _1T1x, _1xT2, _2T2x, _2xT3;
@@ -272,8 +267,8 @@ const math::Vector3 ORIGIN1(0.0, 0.0, 0.0);  // origin of frame 1
       theta_diff = WrapAngle(theta_diff);
 
       // TODO: get the difference in position
-      double x_diff = Tdes[0][2] - Tcurrent[0][2];
-      double y_diff = Tdes[1][2] - Tcurrent[1][2]; 
+      double x_diff = Tdes[0][3] - Tcurrent[0][3];
+      double y_diff = Tdes[1][3] - Tcurrent[1][3]; 
  
       // construct the differential
       math::Vector3 dx(x_diff, y_diff, theta_diff);
@@ -323,6 +318,7 @@ const math::Vector3 ORIGIN1(0.0, 0.0, 0.0);  // origin of frame 1
         // if there's hardly any error, quit
         const double DX_NORM = dx.norm();
         if (DX_NORM < DX_TOL)
+          
           break;
 
         // record smallest dx
@@ -333,14 +329,15 @@ const math::Vector3 ORIGIN1(0.0, 0.0, 0.0);  // origin of frame 1
         Ravelin::MatrixNd J = CalcJacobian(theta1,theta2, theta3);// = FILL ME IN 
 
         // TODO: "solve" J*dq = dx for _dq using SolveJ or TransposeJ
-        Ravelin::VectorNd dq;
-        SolveJ(J, dx, dq); 
+        //Ravelin::VectorNd _dq;
+        SolveJ(J, dx, _dq); 
+	  //TransposeJ(J,dx, _dq); // this one sucks
         // do backtracking search to determine value of t 
         const double ALPHA = 0.05, BETA = 0.5;
         double t = 1.0;
 
         // TODO: compute f(q + dq*t)
-        math::Pose xprime = FKin(theta1+dq[0]*t,theta2+dq[1]*t,theta3+dq[2]*t);// = FILL ME IN
+        math::Pose xprime = FKin(theta1+_dq[0]*t,theta2+_dq[1]*t,theta3+_dq[2]*t);// = FILL ME IN
         math::Vector3 deltax_prime = CalcOSDiff(xprime, target); 
         while (0.5*deltax_prime.GetLength() > 0.5*deltax.GetLength() + ALPHA*t*grad.dot(_dq))
         {
@@ -353,7 +350,7 @@ const math::Vector3 ORIGIN1(0.0, 0.0, 0.0);  // origin of frame 1
 
           // TODO: recompute f(q + dq*t)
           // xprime = FILL ME IN 
-            xprime = FKin(theta1+dq[0]*t,theta2+dq[1]*t,theta3+dq[2]*t);
+            xprime = FKin(theta1+_dq[0]*t,theta2+_dq[1]*t,theta3+_dq[2]*t);
           // recompute deltax_prime
           deltax_prime = CalcOSDiff(xprime, target); 
         }
@@ -377,13 +374,17 @@ const math::Vector3 ORIGIN1(0.0, 0.0, 0.0);  // origin of frame 1
 
         // TODO: update thetas using _dq
         theta1 = theta1 + _dq[0];
-        theta2 = theta1 + _dq[1];
-        theta3 = theta1 + _dq[2];
+        theta2 = theta2 + _dq[1];
+        theta3 = theta3 + _dq[2];
+
+	  iter++;
       }
 
       // update qdes using the IK solution: this will allow the robot to go
       // to the IK solution (using the controller in OnUpdate(.)) 
-      _qdes += _dq;
+      _qdes[0] += theta1;
+	_qdes[1] += theta2;
+	_qdes[2] += theta3;
 
       // indicate IK solution found
       std::cout << "IK solution found after " << restarts << " restarts and " << iter << " iterations" << std::endl;

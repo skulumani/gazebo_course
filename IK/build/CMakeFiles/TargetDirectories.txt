@@ -1,2 +1,0 @@
-/home/shankar/CSCI6525/gazebo_course/IK/build/CMakeFiles/IKPlanar.dir
-/home/shankar/CSCI6525/gazebo_course/IK/build/CMakeFiles/IKSpatial.dir
