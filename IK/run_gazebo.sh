@@ -4,14 +4,14 @@
 
 export GAZEBO_MODEL_PATH="/home/shankar/CSCI6525/gazebo_course/IK"
 export GAZEBO_PLUGIN_PATH="/home/shankar/CSCI6525/gazebo_course/IK/debug"
-export LD_LIBRARY_PATH="/home/shankar/CSCI6525/gazebo_course/Ravelin/build"
+export LD_LIBRARY_PATH="/home/shankar/CSCI6525/Ravelin/build"
 
 # cd ./build
 # cmake ..
 # debug options
 cd ./debug
 # add debug flag to cmake
-cmake -DCMAKE_BUILD_TYPE=Debug
+cmake -DCMAKE_BUILD_TYPE=Debug ..
 make
 cd ..
 # run gazebo in debug mode
@@ -25,7 +25,7 @@ cd ..
 
 # change the filename here for different experiments
 # gazebo -u --verbose planar2.world
-gzserver --verbose planar.world
+gdb --args gzserver --verbose spatial.world
 
 
 

@@ -176,19 +176,24 @@ namespace gazebo
       // initialize the matrix to the proper size
       Ravelin::MatrixNd J(6, nDOF(_model));
 
+      double dof = nDOF(_model);
       // get the current point on the link and the current orientation of the
       // link
       math::Pose x = wrist3->GetWorldCoGPose();
 
       // TODO: iterate over all joints (see code immediately above that shows
       //       how to do this) for computing the Jacobian
-      // compute the other end effector poses
-      Ravelin::VectorNd j(NJOINTS);
+      Ravelin::VectorNd joint(6);
       for (unsigned i=0; i< NJOINTS; i++)
       {
+      
         q[i] += DQ;
-        j[i] = CalcOSDiff(x, FKin(q)).norm();
+        joint = CalcOSDiff(x, FKin(q)); // column i 
+        for (unsigned j=0;j<6; j++)
+            J(j,i) = joint[j];
+
         q[i] -= DQ;
+
       }
       // restore the configuration of the model
       _model->SetState(ms);
@@ -219,11 +224,8 @@ namespace gazebo
 
       // TODO: compute the angular difference from R (not transpose(R) = RT)
       //       to Rdes and put that into dx[3], dx[4], dx[5]
-        math::Matrix3 I[2][2];
+        const math::Matrix3 I = math::Matrix3::IDENTITY;
 
-        I[0][0] = 1; I[0][1] = 0; I[0][2] = 0;
-        I[1][0] = 0; I[1][1] = 1; I[1][2] = 0;
-        I[2][0] = 0; I[2][1] = 0; I[2][2] = 1;
         math::Matrix3 w_skew = Rdes*RT - I;
         
         dx[3] = 1.0/2.0 * (w_skew[2][1]-w_skew[1][2]);
@@ -264,7 +266,7 @@ namespace gazebo
         // get the error between the current and desired poses
 
         // TODO: get the current end-effector pose 
-        math::Pose x;// = FILL ME IN 
+        math::Pose x = FKin(theta);// = FILL ME IN 
 
         // get the error between current and desired poses
         Ravelin::VectorNd dx = CalcOSDiff(x, target);
@@ -283,10 +285,11 @@ namespace gazebo
         std::cout << "dx norm: " << DX_NORM << "  minimum dx observed: " << min_dx << std::endl;
 
         // TODO: get the Jacobian
-        Ravelin::MatrixNd J;// = FILL ME IN
+        Ravelin::MatrixNd J = CalcJacobianNumerical(theta);// = FILL ME IN
 
         // "solve" J*dq = dx for _dq using SolveJ or TransposeJ
-
+       Ravelin::VectorNd _dq(6);
+        SolveJ(J,dx,_dq);
         // do backtracking search to determine value of t 
         const double ALPHA = 0.05, BETA = 0.5;
         double t = 1.0;
@@ -295,8 +298,13 @@ namespace gazebo
         dq2 = _dq;
         dq2 *= t;
 
+
         // TODO: compute f(theta + dq2) 
-        math::Pose xprime;// = FILL ME IN
+        double theta_pert[NJOINTS];
+      for (unsigned i=0; i< NJOINTS; i++)
+       theta_pert[i] =theta[i] + dq2[i];
+
+        math::Pose xprime = FKin(theta_pert);// = FILL ME IN
         Ravelin::VectorNd dx_prime = CalcOSDiff(xprime, target); 
         while (0.5*dx_prime.norm() > 0.5*dx.norm() + ALPHA*t*grad.dot(_dq))
         {
@@ -313,7 +321,10 @@ namespace gazebo
 
           // TODO: recompute f(theta + dq2)
           // xprime = FILL ME IN
+      for (unsigned i=0; i< NJOINTS; i++)
+       theta_pert[i] =theta[i] + dq2[i];
 
+            xprime = FKin(theta_pert);
           // recompute dx_prime
           dx_prime = CalcOSDiff(xprime, target); 
         }
@@ -333,11 +344,16 @@ namespace gazebo
         }
 
         // TODO: update thetas using _dq
+      for (unsigned i = 0; i < NJOINTS; i++)
+            theta[i] += _dq[i];
+
+      iter++;
       }
 
        // update qdes using the IK solution: this will allow the robot to go
       // to the IK solution (using the controller in OnUpdate(.)) 
-      _qdes += _dq;
+      for (unsigned i = 0; i < NJOINTS; i++)
+            _qdes[i] += theta[i];
 
       // indicate IK solution found
       std::cout << "IK solution found after " << restarts << " and " << iter << " iterations" << std::endl;
