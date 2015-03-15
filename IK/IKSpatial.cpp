@@ -188,15 +188,17 @@ namespace gazebo
       {
       
         q[i] += DQ;
-        joint = CalcOSDiff(x, FKin(q)); // column i 
-        for (unsigned j=0;j<6; j++)
-            J(j,i) = joint[j];
+        J.column(i) = CalcOSDiff(x, FKin(q)); // column i 
 
         q[i] -= DQ;
 
       }
       // restore the configuration of the model
       _model->SetState(ms);
+      
+      //for (unsigned i = 0;i<NJOINTS; i++)
+            //for (unsigned j=0;j<6;j++)
+                  //J(j,i) = J(j,i) / DQ;
 
       return J;
     }
@@ -288,8 +290,10 @@ namespace gazebo
         Ravelin::MatrixNd J = CalcJacobianNumerical(theta);// = FILL ME IN
 
         // "solve" J*dq = dx for _dq using SolveJ or TransposeJ
-       Ravelin::VectorNd _dq(6);
+       //Ravelin::VectorNd _dq(6);
         SolveJ(J,dx,_dq);
+            
+            double J11 = J(0,0);
         // do backtracking search to determine value of t 
         const double ALPHA = 0.05, BETA = 0.5;
         double t = 1.0;
