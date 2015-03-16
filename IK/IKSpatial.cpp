@@ -183,22 +183,22 @@ namespace gazebo
 
       // TODO: iterate over all joints (see code immediately above that shows
       //       how to do this) for computing the Jacobian
-      Ravelin::VectorNd joint(6);
+            
       for (unsigned i=0; i< NJOINTS; i++)
       {
       
         q[i] += DQ;
-        J.column(i) = CalcOSDiff(x, FKin(q)); // column i 
+        Ravelin::VectorNd J_i = CalcOSDiff(x, FKin(q));
+
+        for (unsigned j =0;j<6;j++)
+            J(j,i) = J_i[j] ;
 
         q[i] -= DQ;
 
       }
       // restore the configuration of the model
       _model->SetState(ms);
-      
-      //for (unsigned i = 0;i<NJOINTS; i++)
-            //for (unsigned j=0;j<6;j++)
-                  //J(j,i) = J(j,i) / DQ;
+     
 
       return J;
     }
@@ -230,9 +230,12 @@ namespace gazebo
 
         math::Matrix3 w_skew = Rdes*RT - I;
         
-        dx[3] = 1.0/2.0 * (w_skew[2][1]-w_skew[1][2]);
-        dx[4] = 1.0/2.0 * (w_skew[0][2]-w_skew[2][0]);
-        dx[3] = 1.0/2.0 * (w_skew[1][0]-w_skew[0][1]);
+
+        dx[3] = 0.5 * (w_skew[2][1]-w_skew[1][2]);
+        dx[4] = 0.5 * (w_skew[0][2]-w_skew[2][0]);
+        dx[5] = 0.5 * (w_skew[1][0]-w_skew[0][1]);
+
+
       // zero parts of dx that we do not want to use for IK
       if (_do_position)
         dx[3] = dx[4] = dx[5] = 0.0;
@@ -253,6 +256,7 @@ namespace gazebo
       // get the current joint angles
       const unsigned NJOINTS = 6;
       double theta[NJOINTS];
+
       for (unsigned i=0; i< NJOINTS; i++)
        theta[i] = _j[i]->GetAngle(0).Radian();
 
@@ -272,7 +276,8 @@ namespace gazebo
 
         // get the error between current and desired poses
         Ravelin::VectorNd dx = CalcOSDiff(x, target);
-
+        double dx1 = dx[0];
+        double dx2 = dx[1];
         // compute the gradient of 1/2 * ||x_des - f(q)|| - we will use this
         // for the backtracking line search below
         Ravelin::VectorNd grad = GradG(target, theta); 
@@ -291,9 +296,9 @@ namespace gazebo
 
         // "solve" J*dq = dx for _dq using SolveJ or TransposeJ
        //Ravelin::VectorNd _dq(6);
-        SolveJ(J,dx,_dq);
-            
-            double J11 = J(0,0);
+        //SolveJ(J,dx,_dq);
+        TransposeJ(J,dx,_dq);  
+        double J11 = J(0,0);
         // do backtracking search to determine value of t 
         const double ALPHA = 0.05, BETA = 0.5;
         double t = 1.0;
@@ -305,8 +310,8 @@ namespace gazebo
 
         // TODO: compute f(theta + dq2) 
         double theta_pert[NJOINTS];
-      for (unsigned i=0; i< NJOINTS; i++)
-       theta_pert[i] =theta[i] + dq2[i];
+      for (unsigned ii=0; ii< NJOINTS; ii++)
+       theta_pert[ii] = theta[ii] + dq2[ii];
 
         math::Pose xprime = FKin(theta_pert);// = FILL ME IN
         Ravelin::VectorNd dx_prime = CalcOSDiff(xprime, target); 
@@ -325,8 +330,8 @@ namespace gazebo
 
           // TODO: recompute f(theta + dq2)
           // xprime = FILL ME IN
-      for (unsigned i=0; i< NJOINTS; i++)
-       theta_pert[i] =theta[i] + dq2[i];
+      for (unsigned ii=0; ii< NJOINTS; ii++)
+       theta_pert[ii] =theta[ii] + dq2[ii];
 
             xprime = FKin(theta_pert);
           // recompute dx_prime
@@ -348,16 +353,19 @@ namespace gazebo
         }
 
         // TODO: update thetas using _dq
-      for (unsigned i = 0; i < NJOINTS; i++)
-            theta[i] += _dq[i];
-
+      for (unsigned ii = 0; ii < NJOINTS; ii++)
+        {
+            theta[ii] += _dq[ii];
+            std::cout << "theta: " << theta[ii] << " dq: " << _dq[ii] << std::endl; 
+        }
+    std::cout << "t: " << t << std::endl; 
       iter++;
       }
 
        // update qdes using the IK solution: this will allow the robot to go
       // to the IK solution (using the controller in OnUpdate(.)) 
-      for (unsigned i = 0; i < NJOINTS; i++)
-            _qdes[i] += theta[i];
+      for (unsigned ii = 0; ii < NJOINTS; ii++)
+            _qdes[ii] = theta[ii];
 
       // indicate IK solution found
       std::cout << "IK solution found after " << restarts << " and " << iter << " iterations" << std::endl;

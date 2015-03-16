@@ -229,7 +229,7 @@ const math::Vector3 ORIGIN1(0.0, 0.0, 0.0);  // origin of frame 1
     private: double WrapAngle(double x)
     {
     double x_out;
-      // TODO: implement this
+      // TODO: implement this might need a loop for large angles
       if (x > M_PI) 
         {
            x_out = x - 2.0*M_PI;  
@@ -330,8 +330,8 @@ const math::Vector3 ORIGIN1(0.0, 0.0, 0.0);  // origin of frame 1
 
         // TODO: "solve" J*dq = dx for _dq using SolveJ or TransposeJ
         //Ravelin::VectorNd _dq;
-        SolveJ(J, dx, _dq); 
-	  //TransposeJ(J,dx, _dq); // this one sucks
+        //SolveJ(J, dx, _dq);  5 iters
+	  TransposeJ(J,dx, _dq); // this one sucks
         // do backtracking search to determine value of t 
         const double ALPHA = 0.05, BETA = 0.5;
         double t = 1.0;
