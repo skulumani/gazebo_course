@@ -184,15 +184,16 @@ namespace gazebo
       // TODO: iterate over all joints (see code immediately above that shows
       //       how to do this) for computing the Jacobian
             
-      for (unsigned i=0; i< NJOINTS; i++)
+      for (unsigned i=0; i< nDOF(_model); i++)
       {
       
         q[i] += DQ;
         Ravelin::VectorNd J_i = CalcOSDiff(x, FKin(q));
 
         for (unsigned j =0;j<6;j++)
-            J(j,i) = J_i[j] ;
-
+			{
+            	J(j,i) = J_i[j] / DQ ;
+			}
         q[i] -= DQ;
 
       }
@@ -217,9 +218,9 @@ namespace gazebo
 
       // TODO: compute the translational difference from T to Tdes and put
       //       that into dx[0], dx[1], dx[2] 
-        dx[0] = Tdes[0,3] - T[0,3];
-        dx[1] = Tdes[1,3] - T[1,3];
-        dx[2] = Tdes[2,3] - T[2,3];
+        dx[0] = Tdes[0][3] - T[0][3];
+        dx[1] = Tdes[1][3] - T[1][3];
+        dx[2] = Tdes[2][3] - T[2][3];
       // get the necessary rotation matrices to compute angular rotation
       math::Matrix3 Rdes = Tdes.GetRotation().GetAsMatrix3();
       math::Matrix3 RT = T.GetRotation().GetInverse().GetAsMatrix3();
@@ -276,8 +277,7 @@ namespace gazebo
 
         // get the error between current and desired poses
         Ravelin::VectorNd dx = CalcOSDiff(x, target);
-        double dx1 = dx[0];
-        double dx2 = dx[1];
+
         // compute the gradient of 1/2 * ||x_des - f(q)|| - we will use this
         // for the backtracking line search below
         Ravelin::VectorNd grad = GradG(target, theta); 
@@ -296,9 +296,9 @@ namespace gazebo
 
         // "solve" J*dq = dx for _dq using SolveJ or TransposeJ
        //Ravelin::VectorNd _dq(6);
-        //SolveJ(J,dx,_dq);
-        TransposeJ(J,dx,_dq);  
-        double J11 = J(0,0);
+        SolveJ(J,dx,_dq);
+        //TransposeJ(J,dx,_dq);  
+
         // do backtracking search to determine value of t 
         const double ALPHA = 0.05, BETA = 0.5;
         double t = 1.0;
@@ -356,9 +356,8 @@ namespace gazebo
       for (unsigned ii = 0; ii < NJOINTS; ii++)
         {
             theta[ii] += _dq[ii];
-            std::cout << "theta: " << theta[ii] << " dq: " << _dq[ii] << std::endl; 
         }
-    std::cout << "t: " << t << std::endl; 
+
       iter++;
       }
 
