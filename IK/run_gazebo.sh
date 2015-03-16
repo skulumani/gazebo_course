@@ -25,7 +25,8 @@ cd ..
 
 # change the filename here for different experiments
 # gazebo -u --verbose planar2.world
-gdb --args gzserver --verbose spatial.world
+# gdb --args gzserver --verbose spatial.world
+gazebo -u --verbose spatial.world
 
 
 
