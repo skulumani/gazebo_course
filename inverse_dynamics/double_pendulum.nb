@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     15397,        465]
-NotebookOptionsPosition[     14372,        424]
-NotebookOutlinePosition[     14718,        439]
-CellTagsIndexPosition[     14675,        436]
+NotebookDataLength[     15580,        468]
+NotebookOptionsPosition[     14595,        428]
+NotebookOutlinePosition[     14941,        443]
+CellTagsIndexPosition[     14898,        440]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -34,7 +34,8 @@ Cell[BoxData[
   RowBox[{"-", "g"}], " ", "l1", " ", "m1", " ", 
   RowBox[{"Cos", "[", 
    RowBox[{"theta1", "[", "t", "]"}], "]"}]}]], "Output",
- CellChangeTimes->{3.63675336004613*^9, 3.6367542368403225`*^9}]
+ CellChangeTimes->{3.63675336004613*^9, 3.6367542368403225`*^9, 
+  3.6369917087098866`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -66,7 +67,8 @@ Cell[BoxData[
      RowBox[{"theta1", "[", "t", "]"}], "+", 
      RowBox[{"theta2", "[", "t", "]"}]}], "]"}]}]}]], "Output",
  CellChangeTimes->{
-  3.636753419055853*^9, {3.636754221835121*^9, 3.6367542509414506`*^9}}]
+  3.636753419055853*^9, {3.636754221835121*^9, 3.6367542509414506`*^9}, 
+   3.6369917088034925`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -89,7 +91,7 @@ Cell[BoxData[
    RowBox[{
     SuperscriptBox["theta1", "\[Prime]",
      MultilineFunction->None], "[", "t", "]"}], "2"]}]], "Output",
- CellChangeTimes->{3.6367534783526*^9}]
+ CellChangeTimes->{3.6367534783526*^9, 3.636991708834694*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -184,7 +186,8 @@ Cell[BoxData[
     RowBox[{
      SuperscriptBox["theta2", "\[Prime]",
       MultilineFunction->None], "[", "t", "]"}], "2"]}]}]], "Output",
- CellChangeTimes->{3.6367537523785367`*^9, 3.6367542693559256`*^9}]
+ CellChangeTimes->{3.6367537523785367`*^9, 3.6367542693559256`*^9, 
+  3.636991708834694*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -259,7 +262,8 @@ Cell[BoxData[
     RowBox[{
      SuperscriptBox["theta2", "\[Prime]",
       MultilineFunction->None], "[", "t", "]"}], "2"]}]}]], "Output",
- CellChangeTimes->{3.6367537730071883`*^9, 3.636754273223735*^9}]
+ CellChangeTimes->{3.6367537730071883`*^9, 3.636754273223735*^9, 
+  3.636991708850295*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -393,33 +397,33 @@ Cell[BoxData[
           MultilineFunction->None], "[", "t", "]"}]}], ")"}]}]}]}], "}"}], 
   "}"}]], "Output",
  CellChangeTimes->{3.636754145399502*^9, 3.6367543183233447`*^9, 
-  3.636754973257135*^9, 3.636755514172981*^9}]
+  3.636754973257135*^9, 3.636755514172981*^9, 3.6369917090375056`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"Export", "[", 
-  RowBox[{"\"\<double_pendulum.c\>\"", ",", "tau1", ",", "\"\<C\>\""}], 
-  "]"}]], "Input",
- CellChangeTimes->{{3.636755753356147*^9, 3.6367557553348055`*^9}, {
-  3.6367557919917507`*^9, 3.6367558038767047`*^9}, {3.6367558760533237`*^9, 
-  3.636755898552625*^9}}],
+ RowBox[{"CForm", "[", "%", "]"}]], "Input",
+ CellChangeTimes->{{3.63699171275152*^9, 3.636991716891759*^9}}],
 
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Export", "::", "type"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"\[NoBreak]\\!\\(Symbol\\)\[NoBreak] cannot be exported to \
-the \[NoBreak]\\!\\(\\\"C\\\"\\)\[NoBreak] format. \\!\\(\\*ButtonBox[\\\"\
-\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/Export/type\\\", ButtonNote -> \
-\\\"Export::type\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{{3.6367558807031956`*^9, 3.636755899264683*^9}}],
-
-Cell[BoxData["$Failed"], "Output",
- CellChangeTimes->{{3.6367558807031956`*^9, 3.636755899267183*^9}}]
+Cell["\<\
+List(List(Rule(tau1,g*l1*m1*Sin(theta1(t)) + g*l1*m2*Sin(theta1(t)) + 
+      g*l2*m2*Sin(theta1(t) + theta2(t)) - 
+      2*l1*l2*m2*Sin(theta2(t))*Derivative(1)(theta1)(t)*
+       Derivative(1)(theta2)(t) - 
+      l1*l2*m2*Sin(theta2(t))*Power(Derivative(1)(theta2)(t),2) + 
+      Power(l1,2)*m1*Derivative(2)(theta1)(t) + 
+      Power(l1,2)*m2*Derivative(2)(theta1)(t) + 
+      Power(l2,2)*m2*Derivative(2)(theta1)(t) + 
+      2*l1*l2*m2*Cos(theta2(t))*Derivative(2)(theta1)(t) + 
+      Power(l2,2)*m2*Derivative(2)(theta2)(t) + 
+      l1*l2*m2*Cos(theta2(t))*Derivative(2)(theta2)(t)),
+    Rule(tau2,l2*m2*(g*Sin(theta1(t) + theta2(t)) + 
+        l1*Sin(theta2(t))*Power(Derivative(1)(theta1)(t),2) + 
+        (l2 + l1*Cos(theta2(t)))*Derivative(2)(theta1)(t) + 
+        Derivative(2)(theta2)(t)))))\
+\>", "Output",
+ CellChangeTimes->{3.636991717827813*^9}]
 }, Open  ]]
 },
 WindowSize->{767, 873},
@@ -440,36 +444,34 @@ CellTagsIndex->{}
 Notebook[{
 Cell[CellGroupData[{
 Cell[580, 22, 309, 7, 31, "Input"],
-Cell[892, 31, 219, 5, 31, "Output"]
+Cell[892, 31, 246, 6, 31, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1148, 41, 529, 13, 31, "Input"],
-Cell[1680, 56, 446, 12, 31, "Output"]
+Cell[1175, 42, 529, 13, 31, "Input"],
+Cell[1707, 57, 474, 13, 31, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2163, 73, 301, 8, 31, "Input"],
-Cell[2467, 83, 278, 8, 46, "Output"]
+Cell[2218, 75, 301, 8, 31, "Input"],
+Cell[2522, 85, 300, 8, 46, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2782, 96, 1584, 42, 92, "Input"],
-Cell[4369, 140, 1621, 46, 102, "Output"]
+Cell[2859, 98, 1584, 42, 92, "Input"],
+Cell[4446, 142, 1646, 47, 102, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6027, 191, 197, 4, 31, "Input"],
-Cell[6227, 197, 2271, 64, 123, "Output"]
+Cell[6129, 194, 197, 4, 31, "Input"],
+Cell[6329, 200, 2296, 65, 123, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[8535, 266, 1111, 32, 72, "Input"],
-Cell[9649, 300, 3747, 95, 178, "Output"]
+Cell[8662, 270, 1111, 32, 72, "Input"],
+Cell[9776, 304, 3771, 95, 178, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[13433, 400, 302, 6, 31, "Input"],
-Cell[13738, 408, 513, 10, 21, "Message"],
-Cell[14254, 420, 102, 1, 31, "Output"]
+Cell[13584, 404, 123, 2, 31, "Input"],
+Cell[13710, 408, 869, 17, 283, "Output"]
 }, Open  ]]
 }
 ]
 *)
 
 (* End of internal cache information *)
-
