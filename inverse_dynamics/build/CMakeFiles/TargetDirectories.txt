@@ -1,0 +1,2 @@
+/home/shankar/CSCI6525/gazebo_course/inverse_dynamics/build/CMakeFiles/PD_hold.dir
+/home/shankar/CSCI6525/gazebo_course/inverse_dynamics/build/CMakeFiles/track_sinusoidal.dir
