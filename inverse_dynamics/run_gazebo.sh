@@ -27,7 +27,7 @@ cd ..
 # gazebo -u --verbose planar2.world
 # gdb --args gzserver --verbose spatial.world
 #gazebo -u --verbose spatial.world
-gazebo -u --verbose track_sinusoidal.world
+gazebo -u --verbose PD_hold.world
 
 
 

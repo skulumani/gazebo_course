@@ -73,7 +73,7 @@ namespace gazebo
       const double KP = 10.0, KV = 2.50, KI = 0.1;
 
       // setup position and velocity errors
-      const double perr1 = (J1_DES - _j1->GetAngle(0).Radian());
+      const double perr1 = (J1_DES - _j1->GetAngle(0).Radian() );
       const double derr1 = (vJ1_DES - _j1->GetVelocity(0));
       const double perr2 = (J2_DES - _j2->GetAngle(0).Radian());
       const double derr2 = (vJ2_DES - _j2->GetVelocity(0));
